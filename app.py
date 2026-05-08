@@ -13,7 +13,7 @@ import re
 import json
 import easyocr
 from rapidfuzz import process, fuzz
-
+import requests
 
 # ══════════════════════════════
 #       إعدادات الصفحة
@@ -494,8 +494,42 @@ if uploaded_file is not None:
         - ارفع صورة أوضح
         - تأكد إن اسم الدواء ظاهر
         - قلل حد الثقة من الإعدادات
-        """)
-
+            """)
+        st.divider()
+    st.subheader("🛒 طلب الدواء")
+    
+    drug_name = match_result.get('best_match', 'Unknown Drug')
+    
+    available = st.radio(
+        "هل الدواء متوفر عندك؟",
+        ["✅ متوفر", "❌ غير متوفر"]
+    )
+    
+    if available == "❌ غير متوفر":
+    
+        address = st.text_area("📍 اكتب عنوانك")
+        phone = st.text_input("📞 رقم الهاتف")
+    
+        if st.button("🚀 إرسال الطلب للصيدلية"):
+    
+            data = {
+                "drug_name": drug_name,
+                "address": address,
+                "phone": phone
+            }
+    
+            webhook_url = "https://hook.eu1.make.com/eugmkcajoapcapij8lowfd4lo2vbenn7"
+    
+            try:
+                response = requests.post(webhook_url, json=data)
+    
+                if response.status_code == 200:
+                    st.success("✅ تم إرسال الطلب للصيدليات")
+                else:
+                    st.error(f"❌ خطأ: {response.status_code}")
+    
+            except Exception as e:
+                st.error(f"❌ حصل خطأ: {e}")
     # ─── نص OCR ───
     if show_ocr_text:
         with st.expander("📝 نص OCR المستخرج", expanded=False):
