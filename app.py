@@ -26,65 +26,167 @@ st.set_page_config(
 )
 
 # ══════════════════════════════
-#          CSS مخصص
+#   ألوان الثيم (Mazzbot Theme)
 # ══════════════════════════════
+# Primary Teal  : #2DBD9F
+# Dark Teal     : #1A9B82
+# Light Mint BG : #EFF9F6
+# Dark Text     : #14453A
+# Orange Accent : #F5A623
+# White Cards   : #FFFFFF
+# Border/Divider: #D4EEE8
+
 st.markdown("""
 <style>
+    /* ── تغيير خلفية الصفحة ── */
+    .stApp {
+        background-color: #EFF9F6;
+    }
+
+    /* ── الشريط الجانبي ── */
+    [data-testid="stSidebar"] {
+        background-color: #FFFFFF;
+        border-right: 1px solid #D4EEE8;
+    }
+    [data-testid="stSidebar"] .stMarkdown h2,
+    [data-testid="stSidebar"] .stMarkdown h3 {
+        color: #14453A;
+    }
+
+    /* ── الهيدر الرئيسي ── */
     .main-header {
         text-align: center;
-        padding: 20px;
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        border-radius: 15px;
+        padding: 28px 20px;
+        background: linear-gradient(135deg, #2DBD9F 0%, #1A9B82 100%);
+        border-radius: 18px;
         margin-bottom: 30px;
         color: white;
+        box-shadow: 0 4px 20px rgba(45, 189, 159, 0.35);
     }
-    .main-header h1 { font-size: 2.5rem; margin: 0; }
-    .main-header p { font-size: 1.1rem; opacity: 0.9; }
+    .main-header h1 {
+        font-size: 2.4rem;
+        margin: 0 0 8px 0;
+        font-weight: 700;
+    }
+    .main-header p {
+        font-size: 1.05rem;
+        opacity: 0.92;
+        margin: 0;
+    }
 
+    /* ── بطاقة النتيجة ── */
     .result-card {
-        background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-        border-radius: 15px;
-        padding: 25px;
+        background: #FFFFFF;
+        border-radius: 16px;
+        padding: 24px 28px;
         margin: 15px 0;
-        border-left: 5px solid #4CAF50;
+        border-left: 5px solid #2DBD9F;
+        box-shadow: 0 2px 12px rgba(45, 189, 159, 0.15);
     }
-    .result-card h2 { color: #2E7D32; margin: 0 0 10px 0; }
+    .result-card h2 {
+        color: #14453A;
+        margin: 0 0 10px 0;
+        font-size: 1.6rem;
+    }
 
-    .confidence-high { color: #2E7D32; font-weight: bold; }
-    .confidence-medium { color: #F57F17; font-weight: bold; }
-    .confidence-low { color: #C62828; font-weight: bold; }
+    /* ── ثقة النتيجة ── */
+    .confidence-high   { color: #1A9B82; font-weight: 700; }
+    .confidence-medium { color: #F5A623; font-weight: 700; }
+    .confidence-low    { color: #E05252; font-weight: 700; }
 
+    /* ── بطاقات البدائل ── */
     .alt-card {
-        background: #fff;
-        border-radius: 10px;
+        background: #FFFFFF;
+        border-radius: 12px;
         padding: 12px 18px;
         margin: 8px 0;
-        border: 1px solid #e0e0e0;
+        border: 1px solid #D4EEE8;
         display: flex;
         justify-content: space-between;
         align-items: center;
+        transition: box-shadow 0.2s;
+    }
+    .alt-card:hover {
+        box-shadow: 0 2px 10px rgba(45, 189, 159, 0.2);
     }
 
+    /* ── صندوق نص OCR ── */
     .ocr-text-box {
-        background: #263238;
-        color: #4FC3F7;
-        border-radius: 10px;
-        padding: 15px;
+        background: #14453A;
+        color: #7EEBD8;
+        border-radius: 12px;
+        padding: 16px;
         font-family: monospace;
         font-size: 0.95rem;
         direction: ltr;
         text-align: left;
     }
 
+    /* ── بطاقات الإحصائيات ── */
     .stats-box {
-        background: white;
-        border-radius: 12px;
-        padding: 15px;
+        background: #FFFFFF;
+        border-radius: 14px;
+        padding: 18px 12px;
         text-align: center;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        box-shadow: 0 2px 10px rgba(45, 189, 159, 0.12);
+        border: 1px solid #D4EEE8;
     }
-    .stats-box h3 { margin: 0; font-size: 1.8rem; }
-    .stats-box p { margin: 0; color: #666; font-size: 0.85rem; }
+    .stats-box h3 {
+        margin: 0 0 4px 0;
+        font-size: 1.7rem;
+        color: #14453A;
+    }
+    .stats-box p {
+        margin: 0;
+        color: #6B9E94;
+        font-size: 0.85rem;
+    }
+
+    /* ── أزرار Streamlit ── */
+    .stButton > button {
+        background: linear-gradient(135deg, #2DBD9F 0%, #1A9B82 100%);
+        color: white;
+        border: none;
+        border-radius: 10px;
+        padding: 10px 24px;
+        font-weight: 600;
+        transition: opacity 0.2s, transform 0.1s;
+        box-shadow: 0 3px 10px rgba(45, 189, 159, 0.3);
+    }
+    .stButton > button:hover {
+        opacity: 0.9;
+        transform: translateY(-1px);
+    }
+    .stButton > button:active {
+        transform: translateY(0);
+    }
+
+    /* ── Progress bar ── */
+    .stProgress > div > div {
+        background: linear-gradient(90deg, #2DBD9F, #1A9B82);
+        border-radius: 99px;
+    }
+
+    /* ── Dividers ── */
+    hr { border-color: #D4EEE8; }
+
+    /* ── Expanders ── */
+    .streamlit-expanderHeader {
+        background: #FFFFFF;
+        border-radius: 10px;
+        border: 1px solid #D4EEE8;
+        color: #14453A;
+        font-weight: 600;
+    }
+
+    /* ── Metrics ── */
+    [data-testid="stMetric"] {
+        background: #FFFFFF;
+        border-radius: 12px;
+        padding: 12px;
+        border: 1px solid #D4EEE8;
+    }
+    [data-testid="stMetricValue"] { color: #1A9B82; }
 </style>
 """, unsafe_allow_html=True)
 
@@ -145,7 +247,6 @@ class OCREngine:
     def extract_text(self, img_array):
         results = {}
 
-        # طريقة 1: ملونة محسنة
         try:
             enhanced = self.processor.preprocess_color(img_array)
             raw = self.reader.readtext(enhanced)
@@ -155,7 +256,6 @@ class OCREngine:
         except:
             results['color'] = {'text': '', 'confidence': 0, 'details': []}
 
-        # طريقة 2: أبيض وأسود
         try:
             thresh = self.processor.preprocess(img_array)
             raw2 = self.reader.readtext(thresh)
@@ -165,7 +265,6 @@ class OCREngine:
         except:
             results['thresh'] = {'text': '', 'confidence': 0, 'details': []}
 
-        # طريقة 3: أصلية
         try:
             raw3 = self.reader.readtext(img_array)
             text3 = " ".join([r[1] for r in raw3])
@@ -174,7 +273,6 @@ class OCREngine:
         except:
             results['original'] = {'text': '', 'confidence': 0, 'details': []}
 
-        # اختيار أفضل نتيجة
         best_method = max(results, key=lambda k: results[k]['confidence'])
         best = results[best_method]
 
@@ -190,12 +288,13 @@ class OCREngine:
         img_copy = img_array.copy()
         for (bbox, text, conf) in details:
             pts = np.array(bbox, dtype=np.int32)
+            # استخدام ألوان الثيم في المربعات
             if conf > 0.8:
-                color = (0, 255, 0)
+                color = (45, 189, 159)    # تيل (primary)
             elif conf > 0.5:
-                color = (0, 255, 255)
+                color = (245, 166, 35)    # برتقالي (accent)
             else:
-                color = (0, 0, 255)
+                color = (224, 82, 82)     # أحمر (low conf)
 
             cv2.polylines(img_copy, [pts], True, color, 2)
             x, y = pts[0]
@@ -245,14 +344,12 @@ class DrugMatcher:
     def match(self, ocr_text, top_n=5):
         clean = self.clean_text(ocr_text)
 
-        # النص الكامل
         full_matches = process.extract(
             clean, self.drug_list,
             scorer=fuzz.token_sort_ratio,
             limit=top_n
         )
 
-        # كلمة كلمة
         words = clean.split()
         word_matches = []
         for word in words:
@@ -264,14 +361,12 @@ class DrugMatcher:
                 if full:
                     word_matches.append(full)
 
-        # أول كلمتين
         if len(words) >= 2:
             two = " ".join(words[:2])
             two_m = process.extractOne(two, self.drug_list, scorer=fuzz.token_sort_ratio)
             if two_m:
                 word_matches.append(two_m)
 
-        # دمج
         all_matches = {}
         for name, score, idx in full_matches:
             if name not in all_matches or score > all_matches[name]:
@@ -329,7 +424,7 @@ st.markdown("""
 #          SIDEBAR
 # ══════════════════════════════
 with st.sidebar:
-    st.header("⚙️ الإعدادات")
+    st.markdown("## ⚙️ الإعدادات")
 
     confidence_threshold = st.slider(
         "🎯 حد الثقة الأدنى", 0, 100, 60, 5,
@@ -341,18 +436,24 @@ with st.sidebar:
     num_alternatives = st.slider("عدد البدائل", 1, 10, 5)
 
     st.divider()
-    st.header("📊 معلومات")
+    st.markdown("## 📊 معلومات")
     matcher = load_matcher()
-    st.metric("عدد الأدوية في القاعدة", len(matcher.drug_list))
+
+    st.markdown(f"""
+    <div class="stats-box" style="margin-top:8px;">
+        <h3 style="color:#1A9B82;">{len(matcher.drug_list):,}</h3>
+        <p>دواء في القاعدة</p>
+    </div>
+    """, unsafe_allow_html=True)
 
     st.divider()
-    st.caption("صنع بـ ❤️ بواسطة فريق الصيدلة")
+    st.caption("صنع بـ 💚 بواسطة فريق الصيدلة")
 
 
 # ══════════════════════════════
 #        رفع الصورة
 # ══════════════════════════════
-st.header("📷 ارفع صورة الدواء")
+st.markdown("### 📷 ارفع صورة الدواء")
 
 upload_col1, upload_col2 = st.columns([2, 1])
 
@@ -364,12 +465,20 @@ with upload_col1:
     )
 
 with upload_col2:
-    st.info("""
-    **💡 نصائح لأفضل نتيجة:**
-    - 📸 صورة واضحة ومضيئة
-    - 🔤 اسم الدواء ظاهر
-    - 📐 الصورة مش مايلة
-    """)
+    st.markdown("""
+    <div style="
+        background: #FFFFFF;
+        border-radius: 14px;
+        padding: 16px 18px;
+        border: 1px solid #D4EEE8;
+        margin-top: 8px;
+    ">
+        <p style="color:#14453A; font-weight:600; margin:0 0 8px 0;">💡 نصائح لأفضل نتيجة</p>
+        <p style="color:#6B9E94; margin:4px 0;">📸 صورة واضحة ومضيئة</p>
+        <p style="color:#6B9E94; margin:4px 0;">🔤 اسم الدواء ظاهر</p>
+        <p style="color:#6B9E94; margin:4px 0;">📐 الصورة مش مايلة</p>
+    </div>
+    """, unsafe_allow_html=True)
 
 
 # ══════════════════════════════
@@ -377,11 +486,9 @@ with upload_col2:
 # ══════════════════════════════
 if uploaded_file is not None:
 
-    # تحميل الصورة
     image = Image.open(uploaded_file)
     img_array = np.array(image)
 
-    # تحويل لـ BGR
     if len(img_array.shape) == 3 and img_array.shape[2] == 4:
         img_bgr = cv2.cvtColor(img_array, cv2.COLOR_RGBA2BGR)
     elif len(img_array.shape) == 3 and img_array.shape[2] == 3:
@@ -408,16 +515,16 @@ if uploaded_file is not None:
     img_col1, img_col2 = st.columns(2)
 
     with img_col1:
-        st.subheader("📷 الصورة الأصلية")
+        st.markdown("#### 📷 الصورة الأصلية")
         st.image(image, use_container_width=True)
 
     with img_col2:
         if show_boxes and ocr_result['details']:
-            st.subheader("📦 النصوص المكتشفة")
+            st.markdown("#### 📦 النصوص المكتشفة")
             boxed = ocr_engine.draw_boxes(img_bgr, ocr_result['details'])
             st.image(cv2.cvtColor(boxed, cv2.COLOR_BGR2RGB), use_container_width=True)
         else:
-            st.subheader("📷 الصورة المعالجة")
+            st.markdown("#### 🖼️ الصورة المعالجة")
             processed = ImageProcessor.preprocess_color(img_bgr)
             st.image(cv2.cvtColor(processed, cv2.COLOR_BGR2RGB), use_container_width=True)
 
@@ -435,10 +542,15 @@ if uploaded_file is not None:
 
     with s2:
         conf = match_result['confidence']
-        cc = "confidence-high" if conf >= 80 else "confidence-medium" if conf >= 60 else "confidence-low"
+        if conf >= 80:
+            cc, ci = "confidence-high", "✅"
+        elif conf >= 60:
+            cc, ci = "confidence-medium", "⚠️"
+        else:
+            cc, ci = "confidence-low", "❓"
         st.markdown(f"""
         <div class="stats-box">
-            <h3 class="{cc}">{conf:.0f}%</h3>
+            <h3 class="{cc}">{ci} {conf:.0f}%</h3>
             <p>نسبة الثقة</p>
         </div>""", unsafe_allow_html=True)
 
@@ -453,30 +565,30 @@ if uploaded_file is not None:
     with s4:
         st.markdown(f"""
         <div class="stats-box">
-            <h3>🔧 {ocr_result['best_method']}</h3>
+            <h3 style="font-size:1.2rem;">🔧 {ocr_result['best_method']}</h3>
             <p>طريقة المعالجة</p>
         </div>""", unsafe_allow_html=True)
 
     st.divider()
 
     # ─── النتيجة الرئيسية ───
-    st.subheader("🎯 النتيجة")
+    st.markdown("### 🎯 النتيجة")
 
     if match_result['best_match'] and match_result['confidence'] >= confidence_threshold:
         drug_name = match_result['best_match']
         confidence = match_result['confidence']
 
         if confidence >= 80:
-            icon, status, color = "✅", "تم التعرف بنجاح", "#2E7D32"
+            icon, status, color, border = "✅", "تم التعرف بنجاح", "#1A9B82", "#2DBD9F"
         elif confidence >= 60:
-            icon, status, color = "⚠️", "تم التعرف (ثقة متوسطة)", "#F57F17"
+            icon, status, color, border = "⚠️", "تم التعرف (ثقة متوسطة)", "#D4860A", "#F5A623"
         else:
-            icon, status, color = "❓", "غير متأكد", "#C62828"
+            icon, status, color, border = "❓", "غير متأكد", "#B94040", "#E05252"
 
         st.markdown(f"""
-        <div class="result-card" style="border-left-color: {color};">
+        <div class="result-card" style="border-left-color: {border};">
             <h2>{icon} {drug_name}</h2>
-            <p style="font-size: 1.1rem;">
+            <p style="font-size: 1.05rem; color: #4A7A70;">
                 الحالة: <strong style="color: {color};">{status}</strong>
                 &nbsp;|&nbsp;
                 الثقة: <strong style="color: {color};">{confidence:.0f}%</strong>
@@ -487,49 +599,57 @@ if uploaded_file is not None:
         st.progress(confidence / 100)
 
     else:
-        st.error("""
-        ❌ **لم يتم التعرف على الدواء**
+        st.markdown("""
+        <div style="
+            background: #FFF5F5;
+            border-radius: 14px;
+            border: 1px solid #FFCCCC;
+            border-left: 5px solid #E05252;
+            padding: 20px 24px;
+            margin: 10px 0;
+        ">
+            <p style="color:#B94040; font-size:1.1rem; font-weight:700; margin:0 0 8px 0;">
+                ❌ لم يتم التعرف على الدواء
+            </p>
+            <p style="color:#8B5E5E; margin:0;">
+                جرب ارفع صورة أوضح، أو تأكد إن اسم الدواء ظاهر، أو قلل حد الثقة من الإعدادات.
+            </p>
+        </div>
+        """, unsafe_allow_html=True)
 
-        **جرب:**
-        - ارفع صورة أوضح
-        - تأكد إن اسم الدواء ظاهر
-        - قلل حد الثقة من الإعدادات
-            """)
-        st.divider()
-    st.subheader("🛒 طلب الدواء")
-    
+    st.divider()
+
+    # ─── طلب الدواء ───
+    st.markdown("### 🛒 طلب الدواء")
+
     drug_name = match_result.get('best_match', 'Unknown Drug')
-    
+
     available = st.radio(
         "هل الدواء متوفر عندك؟",
         ["✅ متوفر", "❌ غير متوفر"]
     )
-    
+
     if available == "❌ غير متوفر":
-    
         address = st.text_area("📍 اكتب عنوانك")
         phone = st.text_input("📞 رقم الهاتف")
-    
+
         if st.button("🚀 إرسال الطلب للصيدلية"):
-    
             data = {
                 "drug_name": drug_name,
                 "address": address,
                 "phone": phone
             }
-    
             webhook_url = "https://hook.eu1.make.com/eugmkcajoapcapij8lowfd4lo2vbenn7"
-    
+
             try:
                 response = requests.post(webhook_url, json=data)
-    
                 if response.status_code == 200:
                     st.success("✅ تم إرسال الطلب للصيدليات")
                 else:
                     st.error(f"❌ خطأ: {response.status_code}")
-    
             except Exception as e:
                 st.error(f"❌ حصل خطأ: {e}")
+
     # ─── نص OCR ───
     if show_ocr_text:
         with st.expander("📝 نص OCR المستخرج", expanded=False):
@@ -549,12 +669,17 @@ if uploaded_file is not None:
         with st.expander(f"🔄 بدائل محتملة ({len(match_result['alternatives'])})", expanded=False):
             for alt in match_result['alternatives']:
                 score = alt['score']
-                badge = "🟢" if score >= 80 else "🟡" if score >= 60 else "🔴"
+                if score >= 80:
+                    badge, clr = "🟢", "#1A9B82"
+                elif score >= 60:
+                    badge, clr = "🟡", "#D4860A"
+                else:
+                    badge, clr = "🔴", "#B94040"
 
                 st.markdown(f"""
                 <div class="alt-card">
-                    <span>{badge} <strong>{alt['name']}</strong></span>
-                    <span style="color: #666;">{score:.0f}%</span>
+                    <span style="color:#14453A;">{badge} <strong>{alt['name']}</strong></span>
+                    <span style="color:{clr}; font-weight:600;">{score:.0f}%</span>
                 </div>
                 """, unsafe_allow_html=True)
 
@@ -564,13 +689,14 @@ else:
     <div style="
         text-align: center;
         padding: 60px 20px;
-        background: #f8f9fa;
-        border-radius: 15px;
-        border: 2px dashed #ccc;
+        background: #FFFFFF;
+        border-radius: 18px;
+        border: 2px dashed #A8D8CC;
         margin: 30px 0;
     ">
-        <h2 style="color: #999;">📷 ارفع صورة علبة الدواء</h2>
-        <p style="color: #aaa;">اسحب الصورة هنا أو اضغط Browse files</p>
+        <div style="font-size: 3.5rem; margin-bottom: 12px;">💊</div>
+        <h2 style="color: #14453A; margin: 0 0 8px 0;">ارفع صورة علبة الدواء</h2>
+        <p style="color: #6B9E94; margin: 0;">اسحب الصورة هنا أو اضغط Browse files</p>
     </div>
     """, unsafe_allow_html=True)
 
@@ -580,7 +706,7 @@ else:
 # ══════════════════════════════
 st.divider()
 st.markdown("""
-<div style="text-align: center; color: #999; padding: 20px;">
-    💊 نظام التعرف على الأدوية | صنع بـ ❤️
+<div style="text-align: center; color: #6B9E94; padding: 16px;">
+    💊 نظام التعرف على الأدوية &nbsp;|&nbsp; صنع بـ 💚
 </div>
 """, unsafe_allow_html=True)
